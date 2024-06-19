@@ -10,3 +10,8 @@ script = ExtResource("1_sjmc6")
 [node name="Graph" parent="." instance=ExtResource("1_cwfh3")]
 
 [node name="Camera2D" parent="." instance=ExtResource("2_wu08d")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
