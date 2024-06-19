@@ -23,3 +23,6 @@ func _input(event):
 
     if Input.is_action_pressed("step"):
         graph.step()
+
+    if Input.is_action_pressed("erase"):
+        graph.erase(target)
