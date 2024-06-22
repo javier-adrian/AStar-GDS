@@ -33,6 +33,10 @@ func _input(event):
         playing = !playing
         timer.start()
 
+    if Input.is_action_pressed("reset"):
+        graph.reset_progress()
+        playing = false
+
 func _on_timer_timeout():
     if playing:
         graph.step()

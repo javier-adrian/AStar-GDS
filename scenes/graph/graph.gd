@@ -20,6 +20,15 @@ var closed: Dictionary
 
 var n: int
 
+func reset_progress() -> void:
+	open.clear()
+	closed.clear()
+
+	clear_layer(OPEN)
+	clear_layer(CLOSED)
+	clear_layer(CURRENT)
+
+	found = false
 
 func step() -> void:
 	if found || !start_is_ready || !end_is_ready: return
