@@ -1,7 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2j445mrpxeti"]
+[gd_scene load_steps=3 format=3 uid="uid://c2j445mrpxeti"]
 
 [ext_resource type="Script" path="res://scenes/viewer/viewer.gd" id="1_eyvo3"]
+[ext_resource type="Texture2D" uid="uid://djppkexu6e8hy" path="res://assets/tile.png" id="2_j4g04"]
 
-[node name="Camera2D" type="Camera2D"]
+[node name="Camera" type="Camera2D"]
 position = Vector2(576, 324)
 script = ExtResource("1_eyvo3")
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="Margins" type="MarginContainer" parent="UserInterface"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/Margins"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Start" type="CenterContainer" parent="UserInterface/Margins/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Start" type="TextureRect" parent="UserInterface/Margins/HBoxContainer/Start"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+texture = ExtResource("2_j4g04")
+
+[node name="End" type="CenterContainer" parent="UserInterface/Margins/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="End" type="TextureRect" parent="UserInterface/Margins/HBoxContainer/End"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+texture = ExtResource("2_j4g04")

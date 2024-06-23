@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var graph := $Graph
 @onready var timer := $Timer
+@onready var viewer := $Viewer
 @onready var tile_size: Vector2 = Vector2(graph.tile_set.tile_size)
 
 var target: Vector2
@@ -19,15 +20,19 @@ func _input(event):
 
     if Input.is_action_just_released("start"):
         graph.place_start(target)
+        viewer.toggle_start(true)
 
     if Input.is_action_just_released("end"):
         graph.place_end(target)
+        viewer.toggle_end(true)
 
     if Input.is_action_pressed("step"):
         graph.step()
 
     if Input.is_action_pressed("erase"):
         graph.erase(target)
+        viewer.toggle_start(graph.start_is_ready)
+        viewer.toggle_end(graph.end_is_ready)
 
     if Input.is_action_pressed("play"):
         playing = !playing
@@ -40,6 +45,8 @@ func _input(event):
     if Input.is_action_pressed("reset"):
         graph.reset()
         playing = false
+        viewer.toggle_start(false)
+        viewer.toggle_end(false)
 
 func _on_timer_timeout():
     if playing:
