@@ -18,7 +18,6 @@ var end_is_ready: bool = false
 var open: Dictionary
 var closed: Dictionary
 
-var n: int
 
 func reset() -> void:
 	open.clear()
