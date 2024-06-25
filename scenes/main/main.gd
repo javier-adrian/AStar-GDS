@@ -41,14 +41,20 @@ func _input(event):
     if Input.is_action_pressed("reset_progress"):
         graph.reset_progress()
         playing = false
+        viewer.toggle_found(false)
 
     if Input.is_action_pressed("reset"):
         graph.reset()
         playing = false
         viewer.toggle_start(false)
         viewer.toggle_end(false)
+        viewer.toggle_found(false)
 
 func _on_timer_timeout():
     if playing:
         graph.step()
         timer.start()
+
+
+func _on_graph__found():
+    viewer.toggle_found(true)

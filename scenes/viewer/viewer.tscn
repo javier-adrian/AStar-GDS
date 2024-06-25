@@ -38,3 +38,12 @@ layout_mode = 2
 modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("2_j4g04")
+
+[node name="Found" type="CenterContainer" parent="UserInterface/Margins/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UserInterface/Margins/HBoxContainer/Found"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+texture = ExtResource("2_j4g04")

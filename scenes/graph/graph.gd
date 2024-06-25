@@ -18,6 +18,8 @@ var end_is_ready: bool = false
 var open: Dictionary
 var closed: Dictionary
 
+signal _found
+
 
 func reset() -> void:
 	open.clear()
@@ -119,6 +121,7 @@ func search() -> void:
 	for successor in successors:
 		if successor.position == end:
 			found = true
+			_found.emit()
 			continue
 		if successor.position == start || successor.position in get_used_cells(WALL):
 			continue

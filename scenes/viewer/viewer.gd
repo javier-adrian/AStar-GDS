@@ -4,6 +4,7 @@ extends Camera2D
 @onready var margins: MarginContainer = $UserInterface/Margins
 @onready var start: CenterContainer = $UserInterface/Margins/HBoxContainer/Start
 @onready var end: CenterContainer = $UserInterface/Margins/HBoxContainer/End
+@onready var found: CenterContainer = $UserInterface/Margins/HBoxContainer/Found
 
 @onready var width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
 @onready var height: int = ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -16,6 +17,9 @@ func toggle_start(setting: bool) -> void:
 
 func toggle_end(setting: bool) -> void:
 	end.visible = setting
+
+func toggle_found(setting: bool) -> void:
+	found.visible = setting
 
 func _ready():
 	margins.add_theme_constant_override("margin_top", height * .01)
