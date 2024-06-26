@@ -15,9 +15,6 @@ func _input(event):
     if Input.is_action_pressed("wall"):
         graph.add_wall(target)
 
-    if Input.is_action_pressed("erase"):
-        graph.erase(target)
-
     if Input.is_action_just_released("start"):
         graph.place_start(target)
         viewer.toggle_start(true)
