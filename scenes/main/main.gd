@@ -12,21 +12,21 @@ var playing := false
 func _input(event):
     target = floor(get_global_mouse_position() / tile_size)
     
-    if Input.is_action_pressed("wall"):
+    if Input.is_action_pressed("wall") && !playing:
         graph.add_wall(target)
 
-    if Input.is_action_just_released("start"):
+    if Input.is_action_just_released("start") && !playing:
         graph.place_start(target)
         viewer.toggle_start(true)
 
-    if Input.is_action_just_released("end"):
+    if Input.is_action_just_released("end") && !playing:
         graph.place_end(target)
         viewer.toggle_end(true)
 
-    if Input.is_action_pressed("step"):
+    if Input.is_action_pressed("step") && !playing:
         graph.step()
 
-    if Input.is_action_pressed("erase"):
+    if Input.is_action_pressed("erase") && !playing:
         graph.erase(target)
         viewer.toggle_start(graph.start_is_ready)
         viewer.toggle_end(graph.end_is_ready)
@@ -35,12 +35,12 @@ func _input(event):
         playing = !playing
         timer.start()
 
-    if Input.is_action_pressed("reset_progress"):
+    if Input.is_action_pressed("reset_progress") && !playing:
         graph.reset_progress()
         playing = false
         viewer.toggle_found(false)
 
-    if Input.is_action_pressed("reset"):
+    if Input.is_action_pressed("reset") && !playing:
         graph.reset()
         playing = false
         viewer.toggle_start(false)
