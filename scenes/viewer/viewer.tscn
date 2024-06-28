@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2j445mrpxeti"]
+[gd_scene load_steps=5 format=3 uid="uid://c2j445mrpxeti"]
 
 [ext_resource type="Script" path="res://scenes/viewer/viewer.gd" id="1_eyvo3"]
 [ext_resource type="Texture2D" uid="uid://djppkexu6e8hy" path="res://assets/tile.png" id="2_j4g04"]
+[ext_resource type="FontFile" uid="uid://bttdwnl8d6k57" path="res://assets/Minecraftia-Regular.ttf" id="3_qf37p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6m2xf"]
+font = ExtResource("3_qf37p")
+font_size = 14
 
 [node name="Camera" type="Camera2D"]
 position = Vector2(576, 324)
@@ -9,7 +14,7 @@ script = ExtResource("1_eyvo3")
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 
-[node name="Margins" type="MarginContainer" parent="UserInterface"]
+[node name="TopLeft" type="MarginContainer" parent="UserInterface"]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 0
@@ -17,33 +22,52 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/Margins"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/TopLeft"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Start" type="CenterContainer" parent="UserInterface/Margins/HBoxContainer"]
+[node name="Start" type="CenterContainer" parent="UserInterface/TopLeft/HBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Start" type="TextureRect" parent="UserInterface/Margins/HBoxContainer/Start"]
+[node name="Start" type="TextureRect" parent="UserInterface/TopLeft/HBoxContainer/Start"]
 modulate = Color(0, 1, 0, 1)
 layout_mode = 2
 texture = ExtResource("2_j4g04")
 
-[node name="End" type="CenterContainer" parent="UserInterface/Margins/HBoxContainer"]
+[node name="End" type="CenterContainer" parent="UserInterface/TopLeft/HBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="End" type="TextureRect" parent="UserInterface/Margins/HBoxContainer/End"]
+[node name="End" type="TextureRect" parent="UserInterface/TopLeft/HBoxContainer/End"]
 modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("2_j4g04")
 
-[node name="Found" type="CenterContainer" parent="UserInterface/Margins/HBoxContainer"]
+[node name="Found" type="CenterContainer" parent="UserInterface/TopLeft/HBoxContainer"]
 visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="UserInterface/Margins/HBoxContainer/Found"]
+[node name="TextureRect" type="TextureRect" parent="UserInterface/TopLeft/HBoxContainer/Found"]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 2
 texture = ExtResource("2_j4g04")
+
+[node name="BottomLeft" type="MarginContainer" parent="UserInterface"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/BottomLeft"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Coords" type="Label" parent="UserInterface/BottomLeft/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "?, ?"
+label_settings = SubResource("LabelSettings_6m2xf")

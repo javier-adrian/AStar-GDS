@@ -1,10 +1,11 @@
 extends Camera2D
 
 @onready var user_interface: CanvasLayer = $UserInterface
-@onready var margins: MarginContainer = $UserInterface/Margins
-@onready var start: CenterContainer = $UserInterface/Margins/HBoxContainer/Start
-@onready var end: CenterContainer = $UserInterface/Margins/HBoxContainer/End
-@onready var found: CenterContainer = $UserInterface/Margins/HBoxContainer/Found
+# @onready var margins: MarginContainer = $UserInterface/Margins
+@onready var start: CenterContainer = $UserInterface/TopLeft/HBoxContainer/Start
+@onready var end: CenterContainer = $UserInterface/TopLeft/HBoxContainer/End
+@onready var found: CenterContainer = $UserInterface/TopLeft/HBoxContainer/Found
+@onready var coordinates: Label = $UserInterface/BottomLeft/VBoxContainer/Coords
 
 @onready var width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
 @onready var height: int = ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -21,11 +22,15 @@ func toggle_end(setting: bool) -> void:
 func toggle_found(setting: bool) -> void:
 	found.visible = setting
 
+func update_coords(coords: Vector2i) -> void:
+	coordinates.text = "{0}, {1}".format([coords.x, coords.y])
+
 func _ready():
-	margins.add_theme_constant_override("margin_top", height * .01)
-	margins.add_theme_constant_override("margin_bottom", height * .01)
-	margins.add_theme_constant_override("margin_left", width * .01)
-	margins.add_theme_constant_override("margin_right", width * .01)
+	for node in user_interface.get_children():
+		node.add_theme_constant_override("margin_top", height * .01)
+		node.add_theme_constant_override("margin_bottom", height * .01)
+		node.add_theme_constant_override("margin_left", width * .01)
+		node.add_theme_constant_override("margin_right", width * .01)
 
 func _input(event):
 	if Input.is_action_just_released("zoom in") and not pan_mode:

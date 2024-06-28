@@ -8,9 +8,14 @@ extends Node2D
 var target: Vector2
 var playing := false
 
+func _ready():
+    target = floor(get_global_mouse_position() / tile_size)
+    viewer.update_coords(target)
+
 
 func _input(event):
     target = floor(get_global_mouse_position() / tile_size)
+    viewer.update_coords(target)
     
     if Input.is_action_pressed("wall") && !playing:
         graph.add_wall(target)
