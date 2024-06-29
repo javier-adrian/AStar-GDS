@@ -29,4 +29,10 @@ layer_4/tile_data = PackedInt32Array()
 layer_5/name = "current"
 layer_5/modulate = Color(1, 1, 0, 1)
 layer_5/tile_data = PackedInt32Array()
+layer_6/name = "preview"
+layer_6/modulate = Color(1, 1, 1, 0.494118)
+layer_6/tile_data = PackedInt32Array()
 script = ExtResource("2_kji08")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

@@ -16,7 +16,8 @@ func _ready():
 func _input(event):
     target = floor(get_global_mouse_position() / tile_size)
     viewer.update_coords(target)
-    
+    graph.update_preview(target)
+
     if Input.is_action_pressed("wall") && !playing:
         graph.add_wall(target)
 

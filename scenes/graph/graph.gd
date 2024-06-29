@@ -6,6 +6,7 @@ const END = 2
 const OPEN = 3
 const CLOSED = 4
 const CURRENT = 5
+const PREVIEW = 6
 
 var wall: Array[Vector2i]
 var start: Vector2i
@@ -18,8 +19,15 @@ var end_is_ready: bool = false
 var open: Dictionary
 var closed: Dictionary
 
+@onready var visibility_timer: Timer = $Timer
+
 signal _found
 
+
+func update_preview(cursor: Vector2i) -> void:
+	visibility_timer.start()
+	clear_layer(PREVIEW)
+	set_cell(PREVIEW, cursor, 0, Vector2i(0, 0))
 
 func reset() -> void:
 	open.clear()
@@ -54,7 +62,7 @@ func step() -> void:
 		open[start] = Cell.new(start, null)
 
 	search()
-	
+
 
 func replace_cell(layer: int, target: Vector2i, old: Vector2i) -> void:
 	set_cell(layer, target, 0, Vector2i(0,0))
@@ -106,18 +114,18 @@ func search() -> void:
 	for cell in open:
 		if (q && ((open[cell].f <= q.f) || (open[cell].h < q.h))) || !q:
 			q = open[cell]
-	
+
 	open.erase(q.position)
 	erase_cell(OPEN, q.position)
 
 	clear_layer(CURRENT)
 	set_cell(CURRENT, q.position, 0, Vector2i(0,0))
- 
+
 	for x in range(q.position.x - 1, q.position.x + 2):
 		for y in range(q.position.y - 1, q.position.y + 2):
 			if !(x == q.position.x && y == q.position.y):
 				successors.append(Cell.new(Vector2i(x,y), q))
-	
+
 	for successor in successors:
 		if successor.position == end:
 			found = true
@@ -139,7 +147,10 @@ func search() -> void:
 			else:
 				open[successor.position] = successor
 				set_cell(OPEN, successor.position, 0, Vector2i(0, 0))
-		
+
 	if q.position != start && q.position != end:
 		closed[q.position] = q
 		set_cell(CLOSED, q.position, 0, Vector2i(0, 0))
+
+func _process(_delta):
+	set_layer_modulate(PREVIEW, Color(1, 1, 1, bool(visibility_timer.time_left)))
